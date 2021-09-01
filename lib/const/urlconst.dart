@@ -1,0 +1,1 @@
+final String catUrl="https://catfact.ninja";
