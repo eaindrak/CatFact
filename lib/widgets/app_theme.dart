@@ -6,7 +6,12 @@ class AppTheme{
     return ThemeData(
       brightness: Brightness.light,
       primaryColor: ColorConst.exodusFruit,
-      accentColor: ColorConst.prunus
+      accentColor: ColorConst.prunus,
+      appBarTheme: AppBarTheme(
+        titleTextStyle: TextStyle(color: ColorConst.dracularOrchid,fontSize: 13),
+        elevation: 0,
+        iconTheme:IconThemeData(size: 13,color: ColorConst.cityLight) 
+      )
     );
   }
 
@@ -14,7 +19,8 @@ class AppTheme{
     return ThemeData(
       brightness: Brightness.dark,
       primaryColor: ColorConst.ligthGreenishBlue,
-      accentColor: ColorConst.sourLemon
+      accentColor: ColorConst.sourLemon,
+      iconTheme: IconThemeData(size: 14)
     );
   }
 }
