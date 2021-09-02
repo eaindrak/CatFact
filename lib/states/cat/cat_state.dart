@@ -14,7 +14,7 @@ abstract class CatRandomFactState with _$CatRandomFactState {
   ///Loading
   const factory CatRandomFactState.loading() = _CatRandomFactStateLoading;
   ///Data
-  const factory CatRandomFactState.data({required CatFact catFact}) = _CatRandomFactStateData;
+  const factory CatRandomFactState.data({required CatFact catFact,required String imageName}) = _CatRandomFactStateData;
   ///Error
   const factory CatRandomFactState.error([String? error]) = _CatRandomFactStateError;
 }

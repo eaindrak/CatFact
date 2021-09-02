@@ -24,9 +24,11 @@ class _$CatRandomFactStateTearOff {
     return const _CatRandomFactStateLoading();
   }
 
-  _CatRandomFactStateData data({required CatFact catFact}) {
+  _CatRandomFactStateData data(
+      {required CatFact catFact, required String imageName}) {
     return _CatRandomFactStateData(
       catFact: catFact,
+      imageName: imageName,
     );
   }
 
@@ -46,7 +48,7 @@ mixin _$CatRandomFactState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(CatFact catFact) data,
+    required TResult Function(CatFact catFact, String imageName) data,
     required TResult Function(String? error) error,
   }) =>
       throw _privateConstructorUsedError;
@@ -54,7 +56,7 @@ mixin _$CatRandomFactState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(CatFact catFact)? data,
+    TResult Function(CatFact catFact, String imageName)? data,
     TResult Function(String? error)? error,
     required TResult orElse(),
   }) =>
@@ -138,7 +140,7 @@ class _$_CatRandomFactStateInitial implements _CatRandomFactStateInitial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(CatFact catFact) data,
+    required TResult Function(CatFact catFact, String imageName) data,
     required TResult Function(String? error) error,
   }) {
     return initial();
@@ -149,7 +151,7 @@ class _$_CatRandomFactStateInitial implements _CatRandomFactStateInitial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(CatFact catFact)? data,
+    TResult Function(CatFact catFact, String imageName)? data,
     TResult Function(String? error)? error,
     required TResult orElse(),
   }) {
@@ -233,7 +235,7 @@ class _$_CatRandomFactStateLoading implements _CatRandomFactStateLoading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(CatFact catFact) data,
+    required TResult Function(CatFact catFact, String imageName) data,
     required TResult Function(String? error) error,
   }) {
     return loading();
@@ -244,7 +246,7 @@ class _$_CatRandomFactStateLoading implements _CatRandomFactStateLoading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(CatFact catFact)? data,
+    TResult Function(CatFact catFact, String imageName)? data,
     TResult Function(String? error)? error,
     required TResult orElse(),
   }) {
@@ -290,7 +292,7 @@ abstract class _$CatRandomFactStateDataCopyWith<$Res> {
   factory _$CatRandomFactStateDataCopyWith(_CatRandomFactStateData value,
           $Res Function(_CatRandomFactStateData) then) =
       __$CatRandomFactStateDataCopyWithImpl<$Res>;
-  $Res call({CatFact catFact});
+  $Res call({CatFact catFact, String imageName});
 
   $CatFactCopyWith<$Res> get catFact;
 }
@@ -309,12 +311,17 @@ class __$CatRandomFactStateDataCopyWithImpl<$Res>
   @override
   $Res call({
     Object? catFact = freezed,
+    Object? imageName = freezed,
   }) {
     return _then(_CatRandomFactStateData(
       catFact: catFact == freezed
           ? _value.catFact
           : catFact // ignore: cast_nullable_to_non_nullable
               as CatFact,
+      imageName: imageName == freezed
+          ? _value.imageName
+          : imageName // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 
@@ -329,14 +336,17 @@ class __$CatRandomFactStateDataCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_CatRandomFactStateData implements _CatRandomFactStateData {
-  const _$_CatRandomFactStateData({required this.catFact});
+  const _$_CatRandomFactStateData(
+      {required this.catFact, required this.imageName});
 
   @override
   final CatFact catFact;
+  @override
+  final String imageName;
 
   @override
   String toString() {
-    return 'CatRandomFactState.data(catFact: $catFact)';
+    return 'CatRandomFactState.data(catFact: $catFact, imageName: $imageName)';
   }
 
   @override
@@ -344,12 +354,18 @@ class _$_CatRandomFactStateData implements _CatRandomFactStateData {
     return identical(this, other) ||
         (other is _CatRandomFactStateData &&
             (identical(other.catFact, catFact) ||
-                const DeepCollectionEquality().equals(other.catFact, catFact)));
+                const DeepCollectionEquality()
+                    .equals(other.catFact, catFact)) &&
+            (identical(other.imageName, imageName) ||
+                const DeepCollectionEquality()
+                    .equals(other.imageName, imageName)));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(catFact);
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(catFact) ^
+      const DeepCollectionEquality().hash(imageName);
 
   @JsonKey(ignore: true)
   @override
@@ -362,10 +378,10 @@ class _$_CatRandomFactStateData implements _CatRandomFactStateData {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(CatFact catFact) data,
+    required TResult Function(CatFact catFact, String imageName) data,
     required TResult Function(String? error) error,
   }) {
-    return data(catFact);
+    return data(catFact, imageName);
   }
 
   @override
@@ -373,12 +389,12 @@ class _$_CatRandomFactStateData implements _CatRandomFactStateData {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(CatFact catFact)? data,
+    TResult Function(CatFact catFact, String imageName)? data,
     TResult Function(String? error)? error,
     required TResult orElse(),
   }) {
     if (data != null) {
-      return data(catFact);
+      return data(catFact, imageName);
     }
     return orElse();
   }
@@ -411,10 +427,12 @@ class _$_CatRandomFactStateData implements _CatRandomFactStateData {
 }
 
 abstract class _CatRandomFactStateData implements CatRandomFactState {
-  const factory _CatRandomFactStateData({required CatFact catFact}) =
-      _$_CatRandomFactStateData;
+  const factory _CatRandomFactStateData(
+      {required CatFact catFact,
+      required String imageName}) = _$_CatRandomFactStateData;
 
   CatFact get catFact => throw _privateConstructorUsedError;
+  String get imageName => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   _$CatRandomFactStateDataCopyWith<_CatRandomFactStateData> get copyWith =>
       throw _privateConstructorUsedError;
@@ -489,7 +507,7 @@ class _$_CatRandomFactStateError implements _CatRandomFactStateError {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(CatFact catFact) data,
+    required TResult Function(CatFact catFact, String imageName) data,
     required TResult Function(String? error) error,
   }) {
     return error(this.error);
@@ -500,7 +518,7 @@ class _$_CatRandomFactStateError implements _CatRandomFactStateError {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(CatFact catFact)? data,
+    TResult Function(CatFact catFact, String imageName)? data,
     TResult Function(String? error)? error,
     required TResult orElse(),
   }) {
