@@ -8,9 +8,10 @@ class AppTheme{
       primaryColor: ColorConst.exodusFruit,
       accentColor: ColorConst.prunus,
       appBarTheme: AppBarTheme(
+        backgroundColor: ColorConst.cityLight,
         titleTextStyle: TextStyle(color: ColorConst.dracularOrchid,fontSize: 13),
         elevation: 0,
-        iconTheme:IconThemeData(size: 13,color: ColorConst.cityLight) 
+        iconTheme:IconThemeData(size: 13,color: ColorConst.dracularOrchid) 
       )
     );
   }
