@@ -1,7 +1,8 @@
-import 'package:cat_fact/ui/cat/cat_homepage.dart';
 import 'package:cat_fact/widgets/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+
+import 'cat/cat_homepage.dart';
 
 class HomePage extends HookConsumerWidget {
   @override
