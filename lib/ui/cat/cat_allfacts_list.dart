@@ -1,25 +1,36 @@
+import 'dart:math';
+
+import 'package:cat_fact/const/assetConst.dart';
 import 'package:cat_fact/const/colorConst.dart';
-import 'package:cat_fact/model/cat_fact.dart';
+import 'package:cat_fact/states/cat/cat_fact_list/cat_fact_list_provider.dart';
+import 'package:cat_fact/ui/cat/cat_fact_item_page.dart';
+import 'package:cat_fact/widgets/state_error_widget.dart';
+import 'package:cat_fact/widgets/state_loading_widget.dart';
 import 'package:cat_fact/widgets/text_style.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 
-class CatAllFactsPage extends StatefulWidget {
+class CatAllFactsPage extends ConsumerStatefulWidget {
   const CatAllFactsPage({ Key? key }) : super(key: key);
 
   @override
   _CatAllFactsPageState createState() => _CatAllFactsPageState();
 }
 
-class _CatAllFactsPageState extends State<CatAllFactsPage> {
+class _CatAllFactsPageState extends ConsumerState<CatAllFactsPage> {
+  RefreshController _refreshController =
+      RefreshController(initialRefresh: false);
 
-  List<CatFact> catFactLIst=[
-    CatFact(fact: "This is fact one",length: 1),
-    CatFact(fact: "This is fact one",length: 1),
-    CatFact(fact: "This is fact one",length: 1),
-  ];
-  List<String> ddList=['1','2','3'];
-  String _index="1";
+  @override
+  void initState() {
+    Future.delayed(
+        Duration.zero,
+        () =>ref.read(catFactListNotifierProvider.notifier).getAllFactList(1));
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,46 +38,107 @@ class _CatAllFactsPageState extends State<CatAllFactsPage> {
   }
 
   Widget _catFactList(){
-    return Scaffold(
-      backgroundColor: ColorConst.shyMoment,
-      appBar: AppBar(
-        backgroundColor: ColorConst.shyMoment,
-        leading: IconButton(icon: Icon(Icons.arrow_back_ios,color: ColorConst.cityLight,),onPressed: (){
-          Navigator.pop(context);
-        },),
-        title: Text("Hey Hooman!!!",style: TextStyles.smallText.copyWith(color: ColorConst.cityLight),),
-        actions: [
-          IconButton(icon: Icon(Icons.search,color: ColorConst.brightyYellow,),onPressed: (){},),
-          DropdownButton<String>(
-            value: _index,
-            items: ddList.map((String e) => DropdownMenuItem<String>(child: Text(e,style: TextStyles.largeText.copyWith(color: ColorConst.cityLight),),value: e,)).toList(),
-            onChanged: (String? newVal){
-              setState(() {
-                this._index=newVal!;
-              });
-            },
-          )
-        ],
+    final state = ref.watch(catFactListNotifierProvider);
+
+    return state.when(
+      initial: () => Text(
+        'Get Data',
+        textAlign: TextAlign.center,
       ),
-      body: Container(
-        padding: EdgeInsets.only(top: 5),
-        child: ListView.separated(
-          padding: EdgeInsets.all(7),
-          itemBuilder: (context,index){
-            return ListTile(
-              leading: index%2!=0?SvgPicture.asset("assets/images/cat_heart.svg",semanticsLabel: 'Acme Logo',width: 50,):null,
-              trailing: index%2==0?SvgPicture.asset("assets/images/cat_heart.svg",semanticsLabel: 'Acme Logo',width: 50,):null,
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-              tileColor: ColorConst.cityLight,
-              title: Text(catFactLIst[index].fact,textAlign: index%2==0?TextAlign.right:TextAlign.left,),
-            );
-          },
-          separatorBuilder: (context,index){
-            return Padding(padding: EdgeInsets.only(top: 5));
-          },
-          itemCount: catFactLIst.length,
-        )
-      ),
-    );
+      loading: ()=>StateLoadingWidget(), 
+      data: (catFactLIst){
+
+        void _moreLoading(){
+          if(catFactLIst.currentPage<=catFactLIst.lastPage){
+            int _newIndex=catFactLIst.currentPage;
+            ref.read(catFactListNotifierProvider.notifier).getAllFactList(_newIndex+1);
+            _refreshController.loadComplete();
+          }
+        }
+
+        return Scaffold(
+          backgroundColor: ColorConst.shyMoment,
+          appBar: AppBar(
+            backgroundColor: ColorConst.shyMoment,
+            leading: IconButton(icon: Icon(Icons.arrow_back_ios,color: ColorConst.cityLight,),onPressed: (){
+              Navigator.pop(context);
+            },),
+            title: Text("Hey Hooman!!!",style: TextStyles.smallText.copyWith(color: ColorConst.cityLight),),
+            actions: [
+              IconButton(icon: Icon(Icons.search,color: ColorConst.brightyYellow,),onPressed: (){},),
+              Text(catFactLIst.currentPage.toString())
+            ],
+          ),
+          body: Container(
+            padding: EdgeInsets.only(top: 5),
+            child: SmartRefresher(
+              enablePullDown: true,
+              enablePullUp: true,
+              controller: _refreshController,
+              header: WaterDropHeader(),
+              footer: CustomFooter(
+                builder: (BuildContext context,LoadStatus? mode){
+                  Widget body ;
+                  if(mode==LoadStatus.idle){
+                    body =  Text("pull up load");
+                  }
+                  else if(mode==LoadStatus.loading){
+                    body =  CupertinoActivityIndicator();
+                  }
+                  else if(mode == LoadStatus.failed){
+                    body = Text("Load Failed!Click retry!");
+                  }
+                  else if(mode == LoadStatus.canLoading){
+                      body = Text("release to load more");
+                  }
+                  else if(catFactLIst.currentPage>=catFactLIst.lastPage){
+                    body = Text("No more Data");
+                  }else{
+                    body=Text("");
+                  }
+                  return Container(
+                    height: 55.0,
+                    child: Center(child:body),
+                  );
+                },
+              ),
+              onLoading: _moreLoading,
+              onRefresh: _refreshing,
+              child: ListView.separated(
+                padding: EdgeInsets.all(7),
+                itemBuilder: (context,index){
+                  return ListTile(
+                    onTap: ()=>_goToDetail(catFactLIst.catFactDataList[index].fact),
+                    visualDensity: VisualDensity(horizontal: 2),
+                    leading: index%2!=0?SvgPicture.asset("assets/images/cat_heart.svg",semanticsLabel: 'Acme Logo',width: 50,):null,
+                    trailing: index%2==0?SvgPicture.asset("assets/images/cat_heart.svg",semanticsLabel: 'Acme Logo',width: 50,):null,
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                    tileColor: ColorConst.cityLight,
+                    title: Text(catFactLIst.catFactDataList[index].fact,textAlign: index%2==0?TextAlign.right:TextAlign.left,),
+                  );
+                },
+                separatorBuilder: (context,index){
+                  return Padding(padding: EdgeInsets.only(top: 5));
+                },
+                itemCount: catFactLIst.catFactDataList.length,
+              ),
+            ),
+          ),
+        );
+      }, 
+      error: (error) => StateErrorWidget(error: error!),
+    );    
+  }
+
+  void _refreshing(){
+    ref.read(catFactListNotifierProvider.notifier).getAllFactList(1);
+    _refreshController.loadComplete();
+  }
+
+  void _goToDetail(String factName){
+    Random random=new Random();
+    int val=random.nextInt(catImagesList.length-1);
+    String image_name=catImagesList[val].toString();
+    Navigator.push(context, MaterialPageRoute(builder: (context)=>CatFactItemPage(imageName: image_name, factName: factName)));
   }
 }

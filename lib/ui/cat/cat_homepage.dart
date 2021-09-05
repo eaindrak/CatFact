@@ -1,6 +1,6 @@
-import 'package:cat_fact/ui/cat/cat_allfacts_list.dart';
-import 'package:cat_fact/ui/cat/cat_random_fact.dart';
 import 'package:flutter/material.dart';
+import 'cat_allfacts_list.dart';
+import 'cat_random_fact.dart';
 
 class CatHomePage extends StatelessWidget {
   const CatHomePage({ Key? key }) : super(key: key);
