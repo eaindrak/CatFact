@@ -16,8 +16,10 @@ class _CatRandomFactState extends ConsumerState<CatRandomFact> {
 
   @override
   void initState() {
+    Future.delayed(
+        Duration.zero,
+        () =>ref.read(catNotifierProvider.notifier).getRandomFact());
     super.initState();
-    ref.read(catNotifierProvider.notifier).getRandomFact();
   }
 
   @override

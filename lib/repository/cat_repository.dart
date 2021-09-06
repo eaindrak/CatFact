@@ -24,7 +24,6 @@ class CatRepository implements ICatRepository{
     var response=await dioClient.get("/facts?page=$page_index");
     List<CatFact> factList=[];
     if(response["data"].length>0) response["data"].forEach((data){
-      print(data);
       factList.add(new CatFact(fact: data['fact'],length: data['length']));
     });
     return CatFactList(currentPage: response['current_page'],catFactDataList: factList,lastPage: response['last_page']);
