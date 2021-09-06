@@ -8,7 +8,7 @@ extension CatRandomFactGetters on CatRandomFactState {
 }
 
 @freezed
-abstract class CatRandomFactState with _$CatRandomFactState {
+class CatRandomFactState with _$CatRandomFactState {
   ///Initial
   const factory CatRandomFactState.initial() = _CatRandomFactStateInitial;
   ///Loading

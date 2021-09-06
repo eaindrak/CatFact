@@ -8,10 +8,10 @@ class CatFactListNotifier extends StateNotifier<CatFactListState> {
 
   final ICatRepository _catRepository;
 
-  Future<void> getAllFactList(int index) async {
+  Future<void> getAllFactListByPage(int index) async {
     state = const CatFactListState.loading();
     try {
-      final catFactList = await _catRepository.getAllCatFactList(index);
+      final catFactList = await _catRepository.getAllCatFactListByPage(index);
       state = CatFactListState.data(catFactList: catFactList);
     } catch (e) {
       state = CatFactListState.error(e.toString());
