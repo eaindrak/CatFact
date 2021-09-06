@@ -8,7 +8,7 @@ extension CatFactListGetters on CatFactListState {
 }
 
 @freezed
-abstract class CatFactListState with _$CatFactListState {
+class CatFactListState with _$CatFactListState {
   ///Initial
   const factory CatFactListState.initial() = _CatFactListState;
   ///Loading

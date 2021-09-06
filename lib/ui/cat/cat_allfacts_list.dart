@@ -28,7 +28,7 @@ class _CatAllFactsPageState extends ConsumerState<CatAllFactsPage> {
   void initState() {
     Future.delayed(
         Duration.zero,
-        () =>ref.read(catFactListNotifierProvider.notifier).getAllFactList(1));
+        () =>ref.read(catFactListNotifierProvider.notifier).getAllFactListByPage(1));
     super.initState();
   }
 
@@ -51,7 +51,7 @@ class _CatAllFactsPageState extends ConsumerState<CatAllFactsPage> {
         void _moreLoading(){
           if(catFactLIst.currentPage<=catFactLIst.lastPage){
             int _newIndex=catFactLIst.currentPage;
-            ref.read(catFactListNotifierProvider.notifier).getAllFactList(_newIndex+1);
+            ref.read(catFactListNotifierProvider.notifier).getAllFactListByPage(_newIndex+1);
             _refreshController.loadComplete();
           }
         }
@@ -151,7 +151,7 @@ class _CatAllFactsPageState extends ConsumerState<CatAllFactsPage> {
   }
 
   void _refreshing(){
-    ref.read(catFactListNotifierProvider.notifier).getAllFactList(1);
+    ref.read(catFactListNotifierProvider.notifier).getAllFactListByPage(1);
     _refreshController.loadComplete();
   }
 
