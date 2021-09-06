@@ -73,7 +73,7 @@ class CatFactWithImageWidget extends StatelessWidget {
                             topLeft: Radius.circular(20),
                             topRight: Radius.circular(20))),
                     child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
                           factDes,
@@ -81,6 +81,7 @@ class CatFactWithImageWidget extends StatelessWidget {
                               .copyWith(color: ColorConst.cityLight),
                           textAlign: TextAlign.center,
                         ),
+                        Padding(padding: EdgeInsets.only(top: 5)),
                         btnWidget
                       ],
                     ),

@@ -65,8 +65,13 @@ class _CatAllFactsPageState extends ConsumerState<CatAllFactsPage> {
             },),
             title: Text("Hey Hooman!!!",style: TextStyles.smallText.copyWith(color: ColorConst.cityLight),),
             actions: [
+              Center(
+                child: Container(
+                  decoration: BoxDecoration(border: Border.all(color: ColorConst.cityLight)),
+                  padding: EdgeInsets.symmetric(horizontal:5),
+                  child: Text(catFactLIst.currentPage.toString(),style: TextStyles.largeText.copyWith(fontWeight: FontWeight.bold),)),
+              ),
               IconButton(icon: Icon(Icons.search,color: ColorConst.brightyYellow,),onPressed: (){},),
-              Text(catFactLIst.currentPage.toString())
             ],
           ),
           body: Container(
@@ -114,11 +119,26 @@ class _CatAllFactsPageState extends ConsumerState<CatAllFactsPage> {
                     trailing: index%2==0?SvgPicture.asset("assets/images/cat_heart.svg",semanticsLabel: 'Acme Logo',width: 50,):null,
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                     tileColor: ColorConst.cityLight,
-                    title: Text(catFactLIst.catFactDataList[index].fact,textAlign: index%2==0?TextAlign.right:TextAlign.left,),
+                    hoverColor: ColorConst.electronBlue,
+                    title: Text(
+                      catFactLIst.catFactDataList[index].fact.length>100?(catFactLIst.catFactDataList[index].fact.substring(0,100)+"..."):catFactLIst.catFactDataList[index].fact,
+                      textAlign: index%2==0?TextAlign.right:TextAlign.left,
+                    ),
                   );
                 },
                 separatorBuilder: (context,index){
-                  return Padding(padding: EdgeInsets.only(top: 5));
+                  return Container(
+                    decoration: BoxDecoration(
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.5),
+                          spreadRadius: 3,
+                          blurRadius: 3,
+                          offset: Offset(0, 3), // changes position of shadow
+                        ),
+                      ]
+                    ),
+                    padding: EdgeInsets.only(top: 5));
                 },
                 itemCount: catFactLIst.catFactDataList.length,
               ),
