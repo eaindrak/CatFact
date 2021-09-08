@@ -115,8 +115,8 @@ class _CatAllFactsPageState extends ConsumerState<CatAllFactsPage> {
                   return ListTile(
                     onTap: ()=>_goToDetail(catFactLIst.catFactDataList[index].fact),
                     visualDensity: VisualDensity(horizontal: 2),
-                    leading: index%2!=0?SvgPicture.asset("assets/images/cat_heart.svg",semanticsLabel: 'Acme Logo',width: 50,):null,
-                    trailing: index%2==0?SvgPicture.asset("assets/images/cat_heart.svg",semanticsLabel: 'Acme Logo',width: 50,):null,
+                    leading: index%2!=0?SvgPicture.asset("assets/images/cat_heart.svg",semanticsLabel: 'Cat Image',width: 50,):null,
+                    trailing: index%2==0?SvgPicture.asset("assets/images/cat_heart.svg",semanticsLabel: 'Cat Image',width: 50,):null,
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                     tileColor: ColorConst.cityLight,
                     hoverColor: ColorConst.electronBlue,
