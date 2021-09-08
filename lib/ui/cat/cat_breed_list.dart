@@ -111,13 +111,8 @@ class _CatBreedListPageState extends ConsumerState<CatBreedListPage> {
                 itemBuilder: (context,index){
                   String breedName=catBreedList.catbreedList[index].breed;
                   String labelName=catBreedList.catbreedList[index].country!=""?"Country":(catBreedList.catbreedList[index].origin!=""?"Origin":(catBreedList.catbreedList[index].coat!=""?"Coat":(catBreedList.catbreedList[index].pattern!=""?"Pattern":"")));
-                  String labelDesc=catBreedList.catbreedList[index].country!=""?catBreedList.catbreedList[index].country:(catBreedList.catbreedList[index].origin!=""?catBreedList.catbreedList[index].origin:(catBreedList.catbreedList[index].coat!=""?catBreedList.catbreedList[index].coat:(catBreedList.catbreedList[index].pattern!=""?catBreedList.catbreedList[index].pattern:"")));;
-                  if(catBreedList.catbreedList[index].country!=""){
-                    labelName="Country";labelDesc=catBreedList.catbreedList[index].country;
-                  }else{
-
-                  }
-                  return index%2!=0?BreedWidgetImageLeft(breedName: breedName,labelName: labelName,labelDesc: labelDesc,):BreedWidgetImageRight(breedName: breedName,labelName: labelName,labelDesc: labelDesc,);
+                  String labelDesc=catBreedList.catbreedList[index].country!=""?catBreedList.catbreedList[index].country:(catBreedList.catbreedList[index].origin!=""?catBreedList.catbreedList[index].origin:(catBreedList.catbreedList[index].coat!=""?catBreedList.catbreedList[index].coat:(catBreedList.catbreedList[index].pattern!=""?catBreedList.catbreedList[index].pattern:"")));
+                  return index%2!=0?BreedWidgetImageLeft(breedName: breedName,labelName: labelName,labelDesc: labelDesc,catBreed: catBreedList.catbreedList[index],):BreedWidgetImageRight(breedName: breedName,labelName: labelName,labelDesc: labelDesc,catBreed: catBreedList.catbreedList[index]);
                 },
                 separatorBuilder: (context,index){
                   return Container(

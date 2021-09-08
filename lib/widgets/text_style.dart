@@ -8,4 +8,8 @@ class TextStyles{
   static TextStyle largeText=TextStyle(
     fontSize: 18
   );
+
+  static TextStyle extraLargeText=TextStyle(
+    fontSize: 20
+  );
 }
