@@ -4,6 +4,7 @@ import 'package:cat_fact/const/assetConst.dart';
 import 'package:cat_fact/const/colorConst.dart';
 import 'package:cat_fact/states/cat/cat_fact_list/cat_fact_list_provider.dart';
 import 'package:cat_fact/ui/cat/cat_fact_item_page.dart';
+import 'package:cat_fact/widgets/search_delegate_page.dart';
 import 'package:cat_fact/widgets/state_error_widget.dart';
 import 'package:cat_fact/widgets/state_loading_widget.dart';
 import 'package:cat_fact/widgets/text_style.dart';
@@ -71,7 +72,15 @@ class _CatAllFactsPageState extends ConsumerState<CatAllFactsPage> {
                   padding: EdgeInsets.symmetric(horizontal:5),
                   child: Text(catFactLIst.currentPage.toString(),style: TextStyles.largeText.copyWith(fontWeight: FontWeight.bold),)),
               ),
-              IconButton(icon: Icon(Icons.search,color: ColorConst.brightyYellow,),onPressed: (){},),
+              IconButton(icon: Icon(Icons.search,color: ColorConst.brightyYellow,),onPressed: ()async{
+                var res=await showSearch(
+                  context: context,
+                  delegate: TheSearch(listToSearch: catFactLIst.catFactDataList,type: 'fact'),
+                );
+                if(res!=null){
+                  _goToDetail(res.fact);
+                }
+              },),
             ],
           ),
           body: Container(

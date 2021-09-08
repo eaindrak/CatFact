@@ -2,6 +2,8 @@ import 'package:cat_fact/const/colorConst.dart';
 import 'package:cat_fact/states/cat/cat_breed/cat_breed_list_provider.dart';
 import 'package:cat_fact/widgets/breed_widget_img_left.dart';
 import 'package:cat_fact/widgets/breed_widget_img_right.dart';
+import 'package:cat_fact/widgets/cat_breed_bottom_sheet.dart';
+import 'package:cat_fact/widgets/search_delegate_page.dart';
 import 'package:cat_fact/widgets/state_error_widget.dart';
 import 'package:cat_fact/widgets/state_loading_widget.dart';
 import 'package:cat_fact/widgets/text_style.dart';
@@ -68,7 +70,15 @@ class _CatBreedListPageState extends ConsumerState<CatBreedListPage> {
                   padding: EdgeInsets.symmetric(horizontal:5),
                   child: Text("1",style: TextStyles.largeText.copyWith(fontWeight: FontWeight.bold,color: ColorConst.dracularOrchid),)),
               ),
-              IconButton(icon: Icon(Icons.search,color: ColorConst.dracularOrchid,),onPressed: (){},),
+              IconButton(icon: Icon(Icons.search,color: ColorConst.dracularOrchid,),onPressed: ()async{
+                var res=await showSearch(
+                  context: context,
+                  delegate: TheSearch(listToSearch: catBreedList.catbreedList,type: 'breed'),
+                );
+                if(res!=null){
+                  showBreedInfoModal(context,res,"assets/images/noto-v1_cat.svg");
+                }
+              },),
             ],
           ),
           body: Container(
