@@ -3,6 +3,7 @@ import 'package:cat_fact/const/colorConst.dart';
 import 'package:cat_fact/ui/cat/cat_saveto_gallery.dart';
 import 'package:cat_fact/widgets/text_style.dart';
 import 'package:flutter/material.dart';
+import 'package:share_plus/share_plus.dart';
 
 class CatFactWithImageWidget extends StatelessWidget {
   final String imageName;final String factDes;final Widget btnWidget;
@@ -50,7 +51,9 @@ class CatFactWithImageWidget extends StatelessWidget {
             icon: Icon(
               Icons.share,
             ),
-            onPressed: () {},
+            onPressed: () async{
+              await Share.share(imageName);
+            },
           ),
         ],
       ),

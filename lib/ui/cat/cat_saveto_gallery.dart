@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cat_fact/const/colorConst.dart';
 import 'package:cat_fact/widgets/text_style.dart';
 import 'package:flutter/material.dart';
+import 'package:share_plus/share_plus.dart';
 
 class SaveCatToGalleryPage extends StatelessWidget {
   final String networkImage;
@@ -39,7 +40,9 @@ class SaveCatToGalleryPage extends StatelessWidget {
               child: Text("Save To Gallery",textAlign: TextAlign.center,),
             ),
           ),
-          IconButton(icon: Icon(Icons.share),color: ColorConst.cityLight,onPressed: (){},)
+          IconButton(icon: Icon(Icons.share),color: ColorConst.cityLight,onPressed: ()async{
+            await Share.share(networkImage);
+          },)
         ],),
       ),
     );
