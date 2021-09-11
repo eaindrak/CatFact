@@ -3,8 +3,13 @@ import 'package:flutter/material.dart';
 import 'cat_allfacts_list.dart';
 import 'cat_random_fact.dart';
 
-class CatHomePage extends StatelessWidget {
+class CatHomePage extends StatefulWidget {
   const CatHomePage({ Key? key }) : super(key: key);
+
+  @override
+  _CatHomePageState createState() => _CatHomePageState();
+}
+class _CatHomePageState extends State<CatHomePage> {
 
   @override
   Widget build(BuildContext context) {

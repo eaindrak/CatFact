@@ -1,10 +1,11 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cat_fact/const/colorConst.dart';
 import 'package:cat_fact/widgets/text_style.dart';
 import 'package:flutter/material.dart';
 
 class SaveCatToGalleryPage extends StatelessWidget {
-  final String imgAssetName;
-  const SaveCatToGalleryPage({ Key? key,required this.imgAssetName }) : super(key: key);
+  final String networkImage;
+  const SaveCatToGalleryPage({ Key? key,required this.networkImage }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +21,12 @@ class SaveCatToGalleryPage extends StatelessWidget {
       body: Container(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
-        child: Image.asset(imgAssetName,fit: BoxFit.contain,),
+        child: CachedNetworkImage(
+          imageUrl: networkImage,
+          fit: BoxFit.contain,
+          placeholder: (context, url) => Container(width: 50,height: 50,child: CircularProgressIndicator()),
+          errorWidget: (context, url, error) => Image.asset("assets/images/cat_img.png"),
+        ),
       ),
       bottomNavigationBar: Container(
         padding: EdgeInsets.symmetric(horizontal: 5,vertical: 8),

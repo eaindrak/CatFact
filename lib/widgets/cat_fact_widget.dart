@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cat_fact/const/colorConst.dart';
 import 'package:cat_fact/ui/cat/cat_saveto_gallery.dart';
 import 'package:cat_fact/widgets/text_style.dart';
@@ -35,7 +36,7 @@ class CatFactWithImageWidget extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                       builder: (context) => SaveCatToGalleryPage(
-                            imgAssetName: imageName,
+                            networkImage: imageName,
                           )));
             },
           ),
@@ -95,9 +96,11 @@ class CatFactWithImageWidget extends StatelessWidget {
             child: Container(
               width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.height * 1 / 2.5,
-              child: Image.asset(
-                imageName,
+              child: CachedNetworkImage(
+                imageUrl: imageName,
                 fit: BoxFit.contain,
+                placeholder: (context, url) => Container(width: 50,height: 50,child: CircularProgressIndicator()),
+                errorWidget: (context, url, error) => Image.asset("assets/images/cat_img.png"),
               ),
             ),
           ),
