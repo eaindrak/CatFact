@@ -26,7 +26,9 @@
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
-	<key>UISupportedInterfaceOrientations</key>
+	<key>UIMainStoryboardFile</key>
+	<string>NSPhotoLibraryAddUsageDescription</string>
+	<key>This app needs to access photo library.</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 		<string>UIInterfaceOrientationLandscapeLeft</string>
