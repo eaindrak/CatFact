@@ -19,12 +19,12 @@ class CatFactListNotifier extends StateNotifier<CatFactListState> {
   }
 
   Future<String> getRandomImage() async {
-    int min = 0;
-    int max = catImagesList.length-1;
-    var rnd = new Random();
-    int r = min + rnd.nextInt(max - min);
-    String image_name  = catImagesList[r].toString();
-    return image_name;
+    try{
+      final _catImage = await _catRepository.getRandomImage();
+      return _catImage;
+    }catch(e){
+      return "";
+    }
   }
   
 }

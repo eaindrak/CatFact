@@ -1,6 +1,3 @@
-import 'dart:math';
-
-import 'package:cat_fact/const/assetConst.dart';
 import 'package:cat_fact/repository/cat_repository.dart';
 import 'cat_fact_list_state.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';

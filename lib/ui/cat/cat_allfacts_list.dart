@@ -1,7 +1,5 @@
-import 'dart:math';
-
-import 'package:cat_fact/const/assetConst.dart';
 import 'package:cat_fact/const/colorConst.dart';
+import 'package:cat_fact/states/cat/cat_breed/cat_breed_list_provider.dart';
 import 'package:cat_fact/states/cat/cat_fact_list/cat_fact_list_provider.dart';
 import 'package:cat_fact/ui/cat/cat_fact_item_page.dart';
 import 'package:cat_fact/widgets/search_delegate_page.dart';
@@ -164,10 +162,8 @@ class _CatAllFactsPageState extends ConsumerState<CatAllFactsPage> {
     _refreshController.loadComplete();
   }
 
-  void _goToDetail(String factName){
-    Random random=new Random();
-    int val=random.nextInt(catImagesList.length-1);
-    String image_name=catImagesList[val].toString();
+  void _goToDetail(String factName)async{
+    final image_name=await ref.read(catBreedListNotifierProvider.notifier).getRandomImage();
     Navigator.push(context, MaterialPageRoute(builder: (context)=>CatFactItemPage(imageName: image_name, factName: factName)));
   }
 }
