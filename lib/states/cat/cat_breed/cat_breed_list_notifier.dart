@@ -17,5 +17,14 @@ class CatBreedListNotifier extends StateNotifier<CatBreedListState> {
       state = CatBreedListState.error(e.toString());
     }
   }
+
+  Future<String> getRandomImage() async {
+    try{
+      final _catImage = await _catRepository.getRandomImage();
+      return _catImage;
+    }catch(e){
+      return "";
+    }
+  }
   
 }

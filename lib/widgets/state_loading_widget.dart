@@ -19,7 +19,8 @@ class StateLoadingWidget extends StatelessWidget {
             Padding(
               padding: EdgeInsets.only(right: 7),
               child: Text("Please Wait",style: TextStyles.smallText.copyWith(color: ColorConst.dracularOrchid),)),
-            CircularProgressIndicator()
+            //CircularProgressIndicator()
+            Image.asset("assets/images/Loading1.gif",width: MediaQuery.of(context).size.width*1/3,)
         ],)
       ),
     );

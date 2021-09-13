@@ -30,7 +30,7 @@ class SaveCatToGalleryPage extends StatelessWidget {
         child: CachedNetworkImage(
           imageUrl: networkImage,
           fit: BoxFit.contain,
-          placeholder: (context, url) => Container(width: 50,height: 50,child: CircularProgressIndicator()),
+          placeholder: (context, url) => Image.asset("assets/images/Loading.gif",width: MediaQuery.of(context).size.width*1/3,),
           errorWidget: (context, url, error) => Image.asset("assets/images/cat_img.png"),
         ),
       ),
