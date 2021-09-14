@@ -103,7 +103,7 @@ class CatFactWithImageWidget extends StatelessWidget {
                 imageUrl: imageName,
                 fit: BoxFit.contain,
                 placeholder: (context, url) => Image.asset("assets/images/Loading.gif",width: MediaQuery.of(context).size.width*1/3,),
-                errorWidget: (context, url, error) => Image.asset("assets/images/cat_img.png"),
+                errorWidget: (context, url, error) => Icon(Icons.error),
               ),
             ),
           ),
