@@ -66,9 +66,7 @@ class _CatAllFactsPageState extends ConsumerState<CatAllFactsPage> {
             actions: [
               Center(
                 child: Container(
-                  decoration: BoxDecoration(border: Border.all(color: ColorConst.cityLight)),
-                  padding: EdgeInsets.symmetric(horizontal:5),
-                  child: Text(catFactLIst.currentPage.toString(),style: TextStyles.largeText.copyWith(fontWeight: FontWeight.bold),)),
+                  child: Text("Page: "+catFactLIst.currentPage.toString(),style: TextStyles.largeText.copyWith(fontWeight: FontWeight.bold),)),
               ),
               IconButton(icon: Icon(Icons.search,color: ColorConst.brightyYellow,),onPressed: ()async{
                 var res=await showSearch(

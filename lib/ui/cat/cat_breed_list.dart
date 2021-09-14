@@ -56,21 +56,19 @@ class _CatBreedListPageState extends ConsumerState<CatBreedListPage> {
         }
 
         return Scaffold(
-          backgroundColor: ColorConst.cityLight,
+          backgroundColor: ColorConst.brightyYellow,
           appBar: AppBar(
-            backgroundColor: ColorConst.cityLight,
-            leading: IconButton(icon: Icon(Icons.arrow_back_ios,color: ColorConst.dracularOrchid,),onPressed: (){
+            backgroundColor: ColorConst.brightyYellow,
+            leading: IconButton(icon: Icon(Icons.arrow_back_ios,color: ColorConst.cityLight,),onPressed: (){
               Navigator.pop(context);
             },),
-            title: Text("Our Breeds!!!",style: TextStyles.smallText.copyWith(color: ColorConst.dracularOrchid),),
+            title: Text("Our Breeds!!!",style: TextStyles.smallText.copyWith(color: ColorConst.cityLight),),
             actions: [
               Center(
                 child: Container(
-                  decoration: BoxDecoration(border: Border.all(color: ColorConst.dracularOrchid)),
-                  padding: EdgeInsets.symmetric(horizontal:5),
-                  child: Text("1",style: TextStyles.largeText.copyWith(fontWeight: FontWeight.bold,color: ColorConst.dracularOrchid),)),
+                  child: Text("Page: "+catBreedList.currentPage.toString(),style: TextStyles.largeText.copyWith(fontWeight: FontWeight.bold,color: ColorConst.cityLight),)),
               ),
-              IconButton(icon: Icon(Icons.search,color: ColorConst.dracularOrchid,),onPressed: ()async{
+              IconButton(icon: Icon(Icons.search,color: ColorConst.cityLight,),onPressed: ()async{
                 var res=await showSearch(
                   context: context,
                   delegate: TheSearch(listToSearch: catBreedList.catbreedList,type: 'breed'),
