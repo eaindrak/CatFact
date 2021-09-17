@@ -44,7 +44,7 @@ class _CatRandomFactState extends ConsumerState<CatRandomFact> {
             ref.read(catNotifierProvider.notifier).getRandomFact();
           },
           icon: Icon(Icons.next_plan),
-          label: Text("Next")
+          label: Text("Next Fact")
         )
       ),
       error: (error) => StateErrorWidget(error: error!),

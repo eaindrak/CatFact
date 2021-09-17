@@ -59,16 +59,16 @@ class _CatBreedListPageState extends ConsumerState<CatBreedListPage> {
           backgroundColor: ColorConst.brightyYellow,
           appBar: AppBar(
             backgroundColor: ColorConst.brightyYellow,
-            leading: IconButton(icon: Icon(Icons.arrow_back_ios,color: ColorConst.cityLight,),onPressed: (){
+            leading: IconButton(icon: Icon(Icons.arrow_back_ios,color: ColorConst.dracularOrchid,),onPressed: (){
               Navigator.pop(context);
             },),
-            title: Text("Our Breeds!!!",style: TextStyles.smallText.copyWith(color: ColorConst.cityLight),),
+            title: Text("Our Breeds!!!",style: TextStyles.smallText.copyWith(color: ColorConst.dracularOrchid),),
             actions: [
               Center(
                 child: Container(
-                  child: Text("Page: "+catBreedList.currentPage.toString(),style: TextStyles.largeText.copyWith(fontWeight: FontWeight.bold,color: ColorConst.cityLight),)),
+                  child: Text("Page: "+catBreedList.currentPage.toString(),style: TextStyles.largeText.copyWith(fontWeight: FontWeight.bold,color: ColorConst.dracularOrchid),)),
               ),
-              IconButton(icon: Icon(Icons.search,color: ColorConst.cityLight,),onPressed: ()async{
+              IconButton(icon: Icon(Icons.search,color: ColorConst.dracularOrchid,),onPressed: ()async{
                 var res=await showSearch(
                   context: context,
                   delegate: TheSearch(listToSearch: catBreedList.catbreedList,type: 'breed'),

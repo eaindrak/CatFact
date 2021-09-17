@@ -49,7 +49,7 @@ class SaveCatToGalleryPage extends StatelessWidget {
             ),
           ),
           IconButton(icon: Icon(Icons.share),color: ColorConst.cityLight,onPressed: ()async{
-            await Share.share(networkImage);
+            await Share.share(networkImage,subject: "Hey Hooman!!");
           },)
         ],),
       ),

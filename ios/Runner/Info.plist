@@ -27,7 +27,9 @@
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
 	<key>UIMainStoryboardFile</key>
-	<string>NSPhotoLibraryAddUsageDescription</string>
+	<string>NSPhotoLibraryUsageDescription</string> 
+	<key>This app needs to access photo library.</key>
+	<string>NSPhotoLibraryAddUsageDescription</string> 
 	<key>This app needs to access photo library.</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

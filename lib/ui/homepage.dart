@@ -7,7 +7,7 @@ class HomePage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return MaterialApp(
-      theme: AppTheme.ligthTheme(),
+      theme: AppTheme.mainTheme(),
       debugShowCheckedModeBanner: false,
       home: SplashPage()
     );

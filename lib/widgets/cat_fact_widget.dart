@@ -3,6 +3,7 @@ import 'package:cat_fact/const/colorConst.dart';
 import 'package:cat_fact/ui/cat/cat_saveto_gallery.dart';
 import 'package:cat_fact/widgets/text_style.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:share_plus/share_plus.dart';
 
 class CatFactWithImageWidget extends StatelessWidget {
@@ -42,17 +43,18 @@ class CatFactWithImageWidget extends StatelessWidget {
             },
           ),
           IconButton(
-            icon: Icon(
-              Icons.ten_mp,
+            icon: SvgPicture.asset(
+              "assets/images/heart.svg",
+              semanticsLabel: 'Heart Image',
             ),
-            onPressed: () {},
+            onPressed: (){}
           ),
           IconButton(
             icon: Icon(
               Icons.share,
             ),
             onPressed: () async{
-              await Share.share(imageName);
+              await Share.share(imageName,subject: factDes);
             },
           ),
         ],
@@ -82,7 +84,7 @@ class CatFactWithImageWidget extends StatelessWidget {
                         Text(
                           factDes,
                           style: TextStyles.largeText
-                              .copyWith(color: ColorConst.cityLight),
+                                .copyWith(color: ColorConst.cityLight),
                           textAlign: TextAlign.center,
                         ),
                         Padding(padding: EdgeInsets.only(top: 5)),
