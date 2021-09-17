@@ -21,8 +21,9 @@ class BreedWidgetImageLeft extends StatelessWidget {
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height * 1 / 4,
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(15),
-            color: ColorConst.soothingBreeze),
+          borderRadius: BorderRadius.circular(15),
+          color: ColorConst.cityLight
+        ),
         child: Row(
           children: [
             Container(
@@ -38,7 +39,7 @@ class BreedWidgetImageLeft extends StatelessWidget {
                 child: Container(
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15),
-                  color: ColorConst.shyMoment),
+                  color: ColorConst.exodusFruit),
               padding: EdgeInsets.all(7),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -59,7 +60,7 @@ class BreedWidgetImageLeft extends StatelessWidget {
                             .copyWith(color: ColorConst.cityLight, fontSize: 12),
                       ),
                       Text(
-                        labelDesc,
+                        labelDesc.length>40?(labelDesc.substring(0,40)+"..."):labelDesc,
                         style: TextStyles.largeText
                             .copyWith(color: ColorConst.cityLight, fontSize: 16),
                       )

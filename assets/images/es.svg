@@ -1,0 +1,17 @@
+<svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M1.73608 5.90277H23.2639V19.0972H1.73608V5.90277Z" fill="#F1B31C"/>
+<path d="M7.98609 11.4583V13.8889C7.98554 14.0729 7.9122 14.2492 7.78209 14.3793C7.65197 14.5094 7.47566 14.5828 7.29165 14.5833H5.90276C5.71875 14.5828 5.54243 14.5094 5.41232 14.3793C5.2822 14.2492 5.20886 14.0729 5.20831 13.8889V11.4583" fill="#D22F27"/>
+<path d="M1.73608 5.90277H23.2639V9.02777H1.73608V5.90277Z" fill="#D22F27"/>
+<path d="M1.73608 15.9722H23.2639V19.0972H1.73608V15.9722Z" fill="#D22F27"/>
+<path d="M6.59723 11.4583H7.98612V12.8472H6.59723V11.4583Z" fill="#F1B31C"/>
+<path d="M6.59725 13.3681C6.8849 13.3681 7.11808 13.1349 7.11808 12.8472C7.11808 12.5596 6.8849 12.3264 6.59725 12.3264C6.3096 12.3264 6.07642 12.5596 6.07642 12.8472C6.07642 13.1349 6.3096 13.3681 6.59725 13.3681Z" fill="#6A462F"/>
+<path d="M9.375 11.4584V14.5834" stroke="#6A462F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M3.81946 11.4584V14.5834" stroke="#6A462F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M5.20831 10.4167C5.63611 10.1896 6.11288 10.0704 6.5972 10.0695" stroke="#6A462F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M7.98612 10.4167C7.55832 10.1896 7.08155 10.0704 6.59723 10.0695" stroke="#6A462F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M5.20831 11.4584H7.98609" stroke="#6A462F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M7.98609 11.4584V13.8889C7.98554 14.0729 7.9122 14.2493 7.78209 14.3794C7.65197 14.5095 7.47566 14.5828 7.29165 14.5834H5.90276C5.71875 14.5828 5.54243 14.5095 5.41232 14.3794C5.2822 14.2493 5.20886 14.0729 5.20831 13.8889V11.4584" stroke="#6A462F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M3.47223 14.5834H4.16667" stroke="#6A462F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M9.02777 14.5834H9.72222" stroke="#6A462F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M1.73608 5.90277H23.2639V19.0972H1.73608V5.90277Z" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
