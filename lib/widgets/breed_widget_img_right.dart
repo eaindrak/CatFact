@@ -6,14 +6,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class BreedWidgetImageRight extends StatelessWidget {
-  final String breedName;final String labelName;final String labelDesc;final CatBreed catBreed;
-  const BreedWidgetImageRight({Key? key,required this.breedName,required this.labelName,required this.labelDesc,required this.catBreed}) : super(key: key);
+  final String breedName;final String labelName;final String labelDesc;final CatBreed catBreed;final Widget searchBtn;final Widget translateBtn;
+  const BreedWidgetImageRight({Key? key,required this.breedName,required this.labelName,required this.labelDesc,required this.catBreed,required this.searchBtn,required this.translateBtn}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return InkResponse(
       onTap: (){
-        showBreedInfoModal(context,catBreed,"assets/images/twemoji_cat.svg");
+        showBreedInfoModal(context,catBreed,"assets/images/twemoji_cat.svg",searchBtn,translateBtn);
       },
       child: Container(
         padding: EdgeInsets.all(5),

@@ -5,7 +5,8 @@ import 'package:cat_fact/widgets/text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:share_plus/share_plus.dart';
-
+import '../../generated/locale_keys.g.dart';
+import 'package:easy_localization/easy_localization.dart';
 class CatFactWithImageWidget extends StatelessWidget {
   final String imageName;final String factDes;final Widget btnWidget;
   const CatFactWithImageWidget({Key? key,required this.imageName,required this.factDes,required this.btnWidget}) : super(key: key);
@@ -24,7 +25,7 @@ class CatFactWithImageWidget extends StatelessWidget {
           },
         ),
         title: Text(
-          "Hey Hooman!!!",
+          LocaleKeys.heyhooman.tr(),
           style:
               TextStyles.smallText.copyWith(color: ColorConst.dracularOrchid),
         ),
@@ -81,11 +82,14 @@ class CatFactWithImageWidget extends StatelessWidget {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text(
-                          factDes,
-                          style: TextStyles.largeText
-                                .copyWith(color: ColorConst.cityLight),
-                          textAlign: TextAlign.center,
+                        Container(
+                           margin: EdgeInsets.only(top: factDes.length>200?30:0),
+                          padding: EdgeInsets.all(5),
+                          child: Text(
+                            factDes,
+                            style: TextStyles.smallText.copyWith(color: ColorConst.cityLight),
+                            textAlign: TextAlign.center,
+                          ),
                         ),
                         Padding(padding: EdgeInsets.only(top: 5)),
                         btnWidget

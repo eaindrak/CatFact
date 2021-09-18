@@ -5,8 +5,9 @@ import 'package:cat_fact/ui/langSetting.dart';
 import 'package:cat_fact/widgets/text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
 import 'cat_favourites_page.dart';
+import '../../generated/locale_keys.g.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 final controller = PageController(
   initialPage: 0,
@@ -35,7 +36,7 @@ class _CatHomePageState extends State<CatHomePage> {
           backgroundColor: _pages[index%3].bgColor,
           appBar: AppBar(
             backgroundColor: _pages[index%3].bgColor,
-            title: Text("Hey Hooman!!!",style: TextStyles.largeText.copyWith(color: index%3==2?ColorConst.exodusFruit:ColorConst.cityLight),),
+            title: Text(LocaleKeys.heyhooman.tr(),style: TextStyles.largeText.copyWith(color: index%3==2?ColorConst.exodusFruit:ColorConst.cityLight),),
             actions: [
               IconButton(
                 onPressed: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>CatFavPage())),
@@ -47,7 +48,7 @@ class _CatHomePageState extends State<CatHomePage> {
               ),
               IconButton(
                 onPressed: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>LangSettingPage())), 
-                icon: Center(child: SvgPicture.asset("assets/images/us.svg"))
+                icon: Center(child: SvgPicture.asset("assets/images/${context.locale.languageCode}.svg"))
               )
             ],
           ),

@@ -1,5 +1,5 @@
 import 'package:cat_fact/const/colorConst.dart';
-import 'package:cat_fact/states/cat/cat_breed/cat_breed_list_provider.dart';
+import 'package:cat_fact/model/cat_fact.dart';
 import 'package:cat_fact/states/cat/cat_fact_list/cat_fact_list_provider.dart';
 import 'package:cat_fact/ui/cat/cat_fact_item_page.dart';
 import 'package:cat_fact/widgets/search_delegate_page.dart';
@@ -11,6 +11,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+import '../../generated/locale_keys.g.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class CatAllFactsPage extends ConsumerStatefulWidget {
   const CatAllFactsPage({ Key? key }) : super(key: key);
@@ -62,7 +64,7 @@ class _CatAllFactsPageState extends ConsumerState<CatAllFactsPage> {
             leading: IconButton(icon: Icon(Icons.arrow_back_ios,color: ColorConst.cityLight,),onPressed: (){
               Navigator.pop(context);
             },),
-            title: Text("Hey Hooman!!!",style: TextStyles.smallText.copyWith(color: ColorConst.cityLight),),
+            title: Text(LocaleKeys.heyhooman.tr(),style: TextStyles.smallText.copyWith(color: ColorConst.cityLight),),
             actions: [
               Center(
                 child: Container(
@@ -73,8 +75,8 @@ class _CatAllFactsPageState extends ConsumerState<CatAllFactsPage> {
                   context: context,
                   delegate: TheSearch(listToSearch: catFactLIst.catFactDataList,type: 'fact'),
                 );
-                if(res!=null){
-                  _goToDetail(res.fact);
+                if(res!=null&& res is CatFact){
+                  _goToDetail(res);
                 }
               },),
             ],
@@ -118,7 +120,7 @@ class _CatAllFactsPageState extends ConsumerState<CatAllFactsPage> {
                 padding: EdgeInsets.all(7),
                 itemBuilder: (context,index){
                   return ListTile(
-                    onTap: ()=>_goToDetail(catFactLIst.catFactDataList[index].fact),
+                    onTap: ()=>_goToDetail(catFactLIst.catFactDataList[index]),
                     visualDensity: VisualDensity(horizontal: 2),
                     leading: index%2!=0?SvgPicture.asset("assets/images/cat_heart.svg",semanticsLabel: 'Cat Image',width: 50,):null,
                     trailing: index%2==0?SvgPicture.asset("assets/images/cat_heart.svg",semanticsLabel: 'Cat Image',width: 50,):null,
@@ -160,8 +162,7 @@ class _CatAllFactsPageState extends ConsumerState<CatAllFactsPage> {
     _refreshController.loadComplete();
   }
 
-  void _goToDetail(String factName)async{
-    final image_name=await ref.read(catBreedListNotifierProvider.notifier).getRandomImage();
-    Navigator.push(context, MaterialPageRoute(builder: (context)=>CatFactItemPage(imageName: image_name, factName: factName)));
+  void _goToDetail(CatFact catFact){
+    Navigator.push(context, MaterialPageRoute(builder: (context)=>CatFactItemPage(catFact: catFact ,)));
   }
 }

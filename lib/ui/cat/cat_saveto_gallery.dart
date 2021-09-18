@@ -8,7 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:share_plus/share_plus.dart';
-
+import 'package:easy_localization/easy_localization.dart';
+import '../../generated/locale_keys.g.dart';
 class SaveCatToGalleryPage extends StatelessWidget {
   final String networkImage;
   const SaveCatToGalleryPage({ Key? key,required this.networkImage }) : super(key: key);
@@ -22,7 +23,7 @@ class SaveCatToGalleryPage extends StatelessWidget {
         leading: IconButton(icon: Icon(Icons.arrow_back_ios,color: ColorConst.cityLight,),onPressed: (){
           Navigator.pop(context);
         },),
-        title: Text("Hooman, Store Me In Gallery!!!",style: TextStyles.smallText.copyWith(color: ColorConst.cityLight),),
+        title: Text(LocaleKeys.hoomanstoremeingallery.tr(),style: TextStyles.smallText.copyWith(color: ColorConst.cityLight),),
       ),
       body: Container(
         width: MediaQuery.of(context).size.width,
@@ -44,7 +45,7 @@ class SaveCatToGalleryPage extends StatelessWidget {
               child: Container(
                 padding: EdgeInsets.symmetric(vertical: 7),
                 decoration: BoxDecoration(color: ColorConst.cityLight,borderRadius: BorderRadius.circular(20)),
-                child: Text("Save To Gallery",textAlign: TextAlign.center,),
+                child: Text(LocaleKeys.savetogallery.tr(),textAlign: TextAlign.center,),
               ),
             ),
           ),
@@ -65,7 +66,7 @@ class SaveCatToGalleryPage extends StatelessWidget {
       if(_request.isGranted){
         _save(context);
       }else{
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Permission denied"),duration: Duration(seconds: 3),));
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(LocaleKeys.permissiondenied.tr()),duration: Duration(seconds: 3),));
       }
     }
   }

@@ -4,6 +4,8 @@ import 'package:cat_fact/widgets/custom_painter_widget.dart';
 import 'package:cat_fact/widgets/text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:easy_localization/easy_localization.dart';
+import '../generated/locale_keys.g.dart';
 
 class LangSettingPage extends StatefulWidget {
   const LangSettingPage({ Key? key }) : super(key: key);
@@ -19,7 +21,7 @@ class _LangSettingPageState extends State<LangSettingPage> {
       backgroundColor: ColorConst.cityLight,
       appBar: AppBar(
         backgroundColor: ColorConst.exodusFruit,
-        title: Text("Choose Your Prefer language",style: TextStyles.smallText.copyWith(color: ColorConst.cityLight),),
+        title: Text(LocaleKeys.choosepreferlanguage.tr(),style: TextStyles.smallText.copyWith(color: ColorConst.cityLight),),
         leading: IconButton(
           icon: Icon(
             Icons.close,color: ColorConst.cityLight,
@@ -63,10 +65,17 @@ class _LangSettingPageState extends State<LangSettingPage> {
                       color: ColorConst.shyMoment,
                       borderRadius: BorderRadius.circular(10)
                     ),
-                    child: ListTile(
-                      leading: SvgPicture.asset(allLanguageList[index].flag_svg),
-                      title: Text(allLanguageList[index].name),
-                      trailing: Icon(Icons.check_box_outlined,color: ColorConst.cityLight,),
+                    child: InkResponse(
+                      onTap: (){
+                        if(context.locale.languageCode!=allLanguageList[index].language_code){
+                          context.setLocale(Locale(allLanguageList[index].language_code));
+                        }
+                      },
+                      child: ListTile(
+                        leading: SvgPicture.asset(allLanguageList[index].flag_svg),
+                        title: Text(allLanguageList[index].name),
+                        trailing: Icon(Icons.check_box_outlined,color: context.locale.languageCode==allLanguageList[index].language_code?ColorConst.cityLight:Colors.transparent,),
+                      ),
                     ),
                   );
                 },

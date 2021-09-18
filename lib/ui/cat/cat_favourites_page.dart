@@ -1,6 +1,8 @@
 import 'package:cat_fact/const/colorConst.dart';
 import 'package:cat_fact/widgets/text_style.dart';
 import 'package:flutter/material.dart';
+import '../../generated/locale_keys.g.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class CatFavPage extends StatelessWidget {
   const CatFavPage({ Key? key }) : super(key: key);
@@ -18,7 +20,7 @@ class CatFavPage extends StatelessWidget {
           },
         ),
         title: Text(
-          "Hey Hooman!!!",
+          LocaleKeys.heyhooman.tr(),
           style:
               TextStyles.smallText.copyWith(color: ColorConst.dracularOrchid),
         ),

@@ -1,7 +1,8 @@
 import 'package:cat_fact/widgets/text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-
+import '../../generated/locale_keys.g.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'custom_painter_widget.dart';
 
 class CatHomeWidget extends StatefulWidget {
@@ -30,7 +31,7 @@ class _CatHomeWidgetState extends State<CatHomeWidget> {
             Container(height: MediaQuery.of(context).size.height*1/8,),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 10),
-              child: Text("Hey Hooman!!!",style: TextStyles.extraLargeText.copyWith()),
+              child: Text(LocaleKeys.heyhooman.tr(),style: TextStyles.extraLargeText.copyWith()),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 10),

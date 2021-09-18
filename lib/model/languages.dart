@@ -6,7 +6,7 @@ class Lanugages{
 }
 
 List<Lanugages> allLanguageList=[
-    new Lanugages(language_code: "us", flag_svg: "assets/images/us.svg",name: "English"),
+    new Lanugages(language_code: "en", flag_svg: "assets/images/en.svg",name: "English"),
     new Lanugages(language_code: "es", flag_svg: "assets/images/es.svg",name: "Española"),
     new Lanugages(language_code: "my", flag_svg: "assets/images/my.svg",name: "မြန်မာဘာသာ"),
   ];
