@@ -1,7 +1,8 @@
 import 'package:cat_fact/const/colorConst.dart';
 import 'package:cat_fact/widgets/text_style.dart';
 import 'package:flutter/material.dart';
-
+import 'package:easy_localization/easy_localization.dart';
+import '../generated/locale_keys.g.dart';
 class StateLoadingWidget extends StatelessWidget {
   const StateLoadingWidget({ Key? key }) : super(key: key);
 
@@ -18,7 +19,7 @@ class StateLoadingWidget extends StatelessWidget {
           children: [
             Padding(
               padding: EdgeInsets.only(right: 7),
-              child: Text("Please Wait",style: TextStyles.smallText.copyWith(color: ColorConst.dracularOrchid),)),
+              child: Text(LocaleKeys.pleasewait.tr(),style: TextStyles.smallText.copyWith(color: ColorConst.dracularOrchid),)),
             //CircularProgressIndicator()
             Image.asset("assets/images/Loading1.gif",width: MediaQuery.of(context).size.width*1/3,)
         ],)

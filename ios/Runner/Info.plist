@@ -31,6 +31,12 @@
 	<key>This app needs to access photo library.</key>
 	<string>NSPhotoLibraryAddUsageDescription</string> 
 	<key>This app needs to access photo library.</key>
+	<key>CFBundleLocalizations</key>
+	<array>
+		<string>en</string>
+		<string>my</string>
+		<string>es</string>
+	</array>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 		<string>UIInterfaceOrientationLandscapeLeft</string>

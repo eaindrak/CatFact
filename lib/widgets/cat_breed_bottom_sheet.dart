@@ -2,9 +2,11 @@ import 'package:cat_fact/model/cat_breed.dart';
 import 'package:cat_fact/widgets/text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:url_launcher/url_launcher.dart';
+import '../generated/locale_keys.g.dart';
+import 'package:easy_localization/easy_localization.dart';
 
-showBreedInfoModal(BuildContext context,CatBreed catBreed,String svgName){
+showBreedInfoModal(BuildContext context,CatBreed catBreed,String svgName,Widget searchBtn,Widget translateBtn){
+
   showModalBottomSheet(
     isScrollControlled: true,
     backgroundColor: Colors.transparent,
@@ -31,46 +33,43 @@ showBreedInfoModal(BuildContext context,CatBreed catBreed,String svgName){
                     catBreed.country!=""?Container(
                       margin: EdgeInsets.symmetric(vertical: 5),
                       child: ListTile(
-                        title: Text("Country",style: TextStyles.smallText),
+                        title: Text(LocaleKeys.country.tr(),style: TextStyles.smallText),
                         subtitle: Text(catBreed.country,style: TextStyles.largeText),
                       ),
                     ):SizedBox(width: 1,height: 0,),
                     catBreed.origin!=""?Container(
                       margin: EdgeInsets.symmetric(vertical: 5),
                       child: ListTile(
-                        title: Text("Origin",style: TextStyles.smallText),
+                        title: Text(LocaleKeys.origin.tr(),style: TextStyles.smallText),
                         subtitle: Text(catBreed.origin,style: TextStyles.largeText),
                       ),
                     ):SizedBox(width: 1,height: 0,),
                     catBreed.coat!=""?Container(
                       margin: EdgeInsets.symmetric(vertical: 5),
                       child: ListTile(
-                        title: Text("Coat",style: TextStyles.smallText),
+                        title: Text(LocaleKeys.coat.tr(),style: TextStyles.smallText),
                         subtitle: Text(catBreed.coat,style: TextStyles.largeText),
                       ),
                     ):SizedBox(width: 1,height: 0,),
                     catBreed.pattern!=""?Container(
                       margin: EdgeInsets.symmetric(vertical: 5),
                       child: ListTile(
-                        title: Text("Pattern",style: TextStyles.smallText),
+                        title: Text(LocaleKeys.pattern.tr(),style: TextStyles.smallText),
                         subtitle: Text(catBreed.pattern,style: TextStyles.largeText),
                       ),
                     ):SizedBox(width: 1,height: 0,),
                     Container(
                       margin: EdgeInsets.symmetric(vertical: 5),
                       width: MediaQuery.of(context).size.width,
-                      child: Center(
-                        child: ElevatedButton(
-                          child: Text("Search on Google"),
-                          onPressed: ()async{
-                            var _url="https://www.google.com/search?q=${catBreed.breed} breed";
-                            if (await canLaunch(_url)) {
-                              await launch(_url, forceSafariVC: false);
-                            } else {
-                              throw 'Could not launch $_url';
-                            }
-                          },
-                        ),
+                      child: context.locale.languageCode!="en"?
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          translateBtn,searchBtn
+                        ],
+                      ):
+                      Center(
+                        child: searchBtn,
                       ),
                     )
                   ],),
