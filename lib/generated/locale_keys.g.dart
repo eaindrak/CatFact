@@ -17,5 +17,7 @@ abstract class  LocaleKeys {
   static const permissiondenied = 'permissiondenied';
   static const searchongoogle = 'searchongoogle';
   static const pleasewait = 'pleasewait';
+  static const translate = 'translate';
+  static const original = 'original';
 
 }

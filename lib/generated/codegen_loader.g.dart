@@ -30,7 +30,9 @@ class CodegenLoader extends AssetLoader{
   "savetogallery": "Save To Gallery",
   "permissiondenied": "Permission denied",
   "searchongoogle": "Search on Google",
-  "pleasewait": "Please Wait"
+  "pleasewait": "Please Wait",
+  "translate": "Translate",
+  "original": "Original"
 };
 static const Map<String,dynamic> es = {
   "heyhooman": "Hola Hooman!!!",
@@ -48,7 +50,9 @@ static const Map<String,dynamic> es = {
   "savetogallery": "Guardar en la galería",
   "permissiondenied": "Permiso denegado",
   "searchongoogle": "Buscar en Google",
-  "pleasewait": "Espere por favor"
+  "pleasewait": "Espere por favor",
+  "translate": "Traducir",
+  "original": "Originario"
 };
 static const Map<String,dynamic> my = {
   "heyhooman": "ဟေး ဟူးမန်း!!!",
@@ -66,7 +70,9 @@ static const Map<String,dynamic> my = {
   "savetogallery": "ဖုန်းတွင်သိမ်းရန်",
   "permissiondenied": "ခွင့်ပြုချက်မရပါ",
   "searchongoogle": "Google မှာပုံရှာရန်",
-  "pleasewait": "ခဏစောင့်ပါ"
+  "pleasewait": "ခဏစောင့်ပါ",
+  "translate": "ဘာသာပြန်ပါ",
+  "original": "မူရင်းကိုကြည့်ပါ"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"en": en, "es": es, "my": my};
 }

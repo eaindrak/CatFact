@@ -71,7 +71,7 @@ class _CatRandomFactState extends ConsumerState<CatRandomFact> {
         ref.read(catNotifierProvider.notifier).translateText(catFact: catFact,image: image,localeCode: localeCode,translateText: translateText);
       },
       icon: Icon(Icons.language,color: ColorConst.cityLight,),
-      tooltip: localeCode=="en"?"View Original":"View Translate",
+      tooltip: localeCode=="en"?LocaleKeys.original.tr():LocaleKeys.translate.tr(),
     );
   }
 }
