@@ -1,9 +1,8 @@
 import 'package:cat_fact/const/colorConst.dart';
-import 'package:cat_fact/model/cat_breed.dart';
-import 'package:cat_fact/states/cat/cat_breed/cat_breed_list_provider.dart';
+import 'package:cat_fact/states/cat/cat_breed_list/cat_breed_list_provider.dart';
 import 'package:cat_fact/widgets/breed_widget_img_left.dart';
 import 'package:cat_fact/widgets/breed_widget_img_right.dart';
-import 'package:cat_fact/widgets/cat_breed_bottom_sheet.dart';
+import 'package:cat_fact/ui/cat/cat_breed_detail_page.dart';
 import 'package:cat_fact/widgets/search_delegate_page.dart';
 import 'package:cat_fact/widgets/state_error_widget.dart';
 import 'package:cat_fact/widgets/state_loading_widget.dart';
@@ -13,7 +12,6 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:url_launcher/url_launcher.dart';
 import '../../generated/locale_keys.g.dart';
 
 class CatBreedListPage extends ConsumerStatefulWidget {
@@ -78,7 +76,7 @@ class _CatBreedListPageState extends ConsumerState<CatBreedListPage> {
                   delegate: TheSearch(listToSearch: catBreedList.catbreedList,type: 'breed'),
                 );
                 if(res!=null){
-                  showBreedInfoModal(context,res,"assets/images/noto-v1_cat.svg", _searchBtn(res),_translateBtn(),);
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>CatBreedDetailPage(catBreed: res, svgName: "assets/images/noto-v1_cat.svg")));
                 }
               },),
             ],
@@ -125,8 +123,8 @@ class _CatBreedListPageState extends ConsumerState<CatBreedListPage> {
                   String labelName=catBreedList.catbreedList[index].country!=""?LocaleKeys.country.tr():(catBreedList.catbreedList[index].origin!=""?LocaleKeys.origin.tr():(catBreedList.catbreedList[index].coat!=""?LocaleKeys.coat.tr():(catBreedList.catbreedList[index].pattern!=""?LocaleKeys.pattern.tr():"")));
                   String labelDesc=catBreedList.catbreedList[index].country!=""?catBreedList.catbreedList[index].country:(catBreedList.catbreedList[index].origin!=""?catBreedList.catbreedList[index].origin:(catBreedList.catbreedList[index].coat!=""?catBreedList.catbreedList[index].coat:(catBreedList.catbreedList[index].pattern!=""?catBreedList.catbreedList[index].pattern:"")));
                   return index%2!=0?
-                  BreedWidgetImageLeft(breedName: breedName,labelName: labelName,labelDesc: labelDesc,catBreed: catBreedList.catbreedList[index],searchBtn: _searchBtn(catBreedList.catbreedList[index]),translateBtn: _translateBtn(),):
-                  BreedWidgetImageRight(breedName: breedName,labelName: labelName,labelDesc: labelDesc,catBreed: catBreedList.catbreedList[index],searchBtn: _searchBtn(catBreedList.catbreedList[index]),translateBtn: _translateBtn(),);
+                  BreedWidgetImageLeft(breedName: breedName,labelName: labelName,labelDesc: labelDesc,catBreed: catBreedList.catbreedList[index],):
+                  BreedWidgetImageRight(breedName: breedName,labelName: labelName,labelDesc: labelDesc,catBreed: catBreedList.catbreedList[index],);
                 },
                 separatorBuilder: (context,index){
                   return Container(
@@ -145,29 +143,5 @@ class _CatBreedListPageState extends ConsumerState<CatBreedListPage> {
   void _refreshing(){
     ref.read(catBreedListNotifierProvider.notifier).getAllBreedListByPage(1);
     _refreshController.loadComplete();
-  }
-
-  Widget _searchBtn(CatBreed catBreed){
-    return ElevatedButton(
-      child: Text(LocaleKeys.searchongoogle.tr()),
-      onPressed: ()async{
-        var _url="https://www.google.com/search?q=${catBreed.breed} breed";
-        if (await canLaunch(_url)) {
-          await launch(_url, forceSafariVC: false);
-        } else {
-          throw 'Could not launch $_url';
-        }
-      },
-    );
-  }
-
-  Widget _translateBtn(){
-    return ElevatedButton.icon(
-      onPressed: () {
-        //ref.read(catNotifierProvider.notifier).translateText(catFact: catFact,image: image,localeCode: localeCode,translateText: translateText);
-      },
-      icon: Icon(Icons.language),
-      label: Text("View Translate",style: TextStyles.smallText.copyWith(color: ColorConst.cityLight),)
-    );
   }
 }

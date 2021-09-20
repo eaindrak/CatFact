@@ -9,6 +9,7 @@ import 'package:cat_fact/widgets/text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:easy_localization/easy_localization.dart';
+import '../../generated/locale_keys.g.dart';
 class CatFactItemPage extends ConsumerStatefulWidget {
   final CatFact catFact;
   const CatFactItemPage({ Key? key,required this.catFact }) : super(key: key);
@@ -29,11 +30,6 @@ class _CatFactItemPageState extends ConsumerState<CatFactItemPage> {
 
   @override
   Widget build(BuildContext context) {
-    // return CatFactWithImageWidget(
-    //   imageName: widget.imageName,
-    //   factDes: widget.factName,
-    //   btnWidget: SizedBox(width: 1,height: 1,),
-    // );
     final state = ref.watch(catNotifierProvider);
     
     return state.when(
@@ -58,7 +54,7 @@ class _CatFactItemPageState extends ConsumerState<CatFactItemPage> {
         ref.read(catNotifierProvider.notifier).translateText(catFact: catFact,image: image,localeCode: localeCode,translateText: translateText);
       },
       icon: Icon(Icons.language),
-      label: Text(localeCode=="en"?"View Original":"View Translate",style: TextStyles.smallText.copyWith(color: ColorConst.cityLight),)
+      label: Text(localeCode=="en"?LocaleKeys.original.tr():LocaleKeys.translate.tr(),style: TextStyles.smallText.copyWith(color: ColorConst.cityLight),)
     );
   }
 }
