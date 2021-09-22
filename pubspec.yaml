@@ -44,7 +44,7 @@ dependencies:
   permission_handler: ^8.1.6
   easy_localization: ^3.0.0
   translator: ^0.1.7
-  # image_downloader: ^0.30.0
+  moor_flutter: ^4.0.0
 
 dev_dependencies:
   flutter_test:
@@ -52,6 +52,7 @@ dev_dependencies:
   build_runner: ^2.1.1
   freezed: ^0.14.2
   json_serializable: ^4.1.4
+  moor_generator: ^4.4.1
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
