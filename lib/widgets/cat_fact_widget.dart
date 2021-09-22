@@ -3,13 +3,12 @@ import 'package:cat_fact/const/colorConst.dart';
 import 'package:cat_fact/ui/cat/cat_saveto_gallery.dart';
 import 'package:cat_fact/widgets/text_style.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:share_plus/share_plus.dart';
 import '../../generated/locale_keys.g.dart';
 import 'package:easy_localization/easy_localization.dart';
 class CatFactWithImageWidget extends StatelessWidget {
-  final String imageName;final String factDes;final Widget btnWidget;
-  const CatFactWithImageWidget({Key? key,required this.imageName,required this.factDes,required this.btnWidget}) : super(key: key);
+  final String imageName;final String factDes;final Widget btnWidget;final Widget saveToFav;
+  const CatFactWithImageWidget({Key? key,required this.imageName,required this.factDes,required this.btnWidget,required this.saveToFav}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -43,13 +42,7 @@ class CatFactWithImageWidget extends StatelessWidget {
                           )));
             },
           ),
-          IconButton(
-            icon: SvgPicture.asset(
-              "assets/images/heart.svg",
-              semanticsLabel: 'Heart Image',
-            ),
-            onPressed: (){}
-          ),
+          saveToFav,
           IconButton(
             icon: Icon(
               Icons.share,

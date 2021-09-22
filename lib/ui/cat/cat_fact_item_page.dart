@@ -7,6 +7,7 @@ import 'package:cat_fact/widgets/state_error_widget.dart';
 import 'package:cat_fact/widgets/state_loading_widget.dart';
 import 'package:cat_fact/widgets/text_style.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:easy_localization/easy_localization.dart';
 import '../../generated/locale_keys.g.dart';
@@ -38,23 +39,34 @@ class _CatFactItemPageState extends ConsumerState<CatFactItemPage> {
         textAlign: TextAlign.center,
       ),
       loading: () => StateLoadingWidget(),
-      data: (cat_randomFact,image,langcode,transText)=>CatFactWithImageWidget(
+      data: (cat_randomFact,image,langcode,transText,isSaved)=>CatFactWithImageWidget(
         imageName: image,
+        saveToFav: _saveToFavorite(cat_randomFact,image,langcode,transText,isSaved),
         factDes: cat_randomFact.fact,
         btnWidget:  context.locale.languageCode!="en"?
-        _translate(cat_randomFact,image,langcode=="en"?context.locale.languageCode:"en",transText):SizedBox(width: 1,height: 1,),
+        _translate(cat_randomFact,image,langcode=="en"?context.locale.languageCode:"en",transText,isSaved):SizedBox(width: 1,height: 1,),
       ),
       error: (error) => StateErrorWidget(error: error!),
     );
   }
 
-  Widget _translate(CatFact catFact,String image,String localeCode,TranslateText translateText){
+  Widget _translate(CatFact catFact,String image,String localeCode,TranslateText translateText,int isSaved){
     return ElevatedButton.icon(
       onPressed: () {
-        ref.read(catNotifierProvider.notifier).translateText(catFact: catFact,image: image,localeCode: localeCode,translateText: translateText);
+        ref.read(catNotifierProvider.notifier).translateText(catFact: catFact,image: image,localeCode: localeCode,translateText: translateText,isSaved: isSaved);
       },
       icon: Icon(Icons.language),
       label: Text(localeCode=="en"?LocaleKeys.original.tr():LocaleKeys.translate.tr(),style: TextStyles.smallText.copyWith(color: ColorConst.cityLight),)
+    );
+  }
+
+  Widget _saveToFavorite(CatFact catFact,String image,String localeCode,TranslateText translateText,int isSaved){
+    return IconButton(
+      tooltip: isSaved>0?"Added To Favorite":"Not Favorite",
+      icon: SvgPicture.asset("assets/images/heart.svg",semanticsLabel: 'Heart Image',color: isSaved>0?ColorConst.exodusFruit:ColorConst.shyMoment,),
+      onPressed: (){
+        ref.read(catNotifierProvider.notifier).addToFavorite(catFact: catFact, image: image, localeCode: localeCode, translateText: translateText);
+      }
     );
   }
 }
