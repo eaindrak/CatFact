@@ -3,6 +3,7 @@ import 'package:cat_fact/model/cat_fact.dart';
 import 'package:cat_fact/model/tranlate_text.dart';
 import 'package:cat_fact/states/cat/cat_fact/cat_provider.dart';
 import 'package:cat_fact/widgets/cat_fact_widget.dart';
+import 'package:cat_fact/widgets/confirm_dialog.dart';
 import 'package:cat_fact/widgets/state_error_widget.dart';
 import 'package:cat_fact/widgets/state_loading_widget.dart';
 import 'package:cat_fact/widgets/text_style.dart';
@@ -39,13 +40,16 @@ class _CatFactItemPageState extends ConsumerState<CatFactItemPage> {
         textAlign: TextAlign.center,
       ),
       loading: () => StateLoadingWidget(),
-      data: (cat_randomFact,image,langcode,transText,isSaved)=>CatFactWithImageWidget(
-        imageName: image,
-        saveToFav: _saveToFavorite(cat_randomFact,image,langcode,transText,isSaved),
-        factDes: cat_randomFact.fact,
-        btnWidget:  context.locale.languageCode!="en"?
-        _translate(cat_randomFact,image,langcode=="en"?context.locale.languageCode:"en",transText,isSaved):SizedBox(width: 1,height: 1,),
-      ),
+      data: (cat_randomFact,image,langcode,transText,isSaved,msg){
+        if(msg!="") ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(msg),duration: Duration(seconds: 3),));
+        return CatFactWithImageWidget(
+          imageName: image,
+          saveToFav: _saveToFavorite(cat_randomFact,image,langcode,transText,isSaved),
+          factDes: cat_randomFact.fact,
+          btnWidget:  context.locale.languageCode!="en"?
+          _translate(cat_randomFact,image,langcode=="en"?context.locale.languageCode:"en",transText,isSaved):SizedBox(width: 1,height: 1,),
+        );
+      },
       error: (error) => StateErrorWidget(error: error!),
     );
   }
@@ -62,10 +66,17 @@ class _CatFactItemPageState extends ConsumerState<CatFactItemPage> {
 
   Widget _saveToFavorite(CatFact catFact,String image,String localeCode,TranslateText translateText,int isSaved){
     return IconButton(
-      tooltip: isSaved>0?"Added To Favorite":"Not Favorite",
-      icon: SvgPicture.asset("assets/images/heart.svg",semanticsLabel: 'Heart Image',color: isSaved>0?ColorConst.exodusFruit:ColorConst.shyMoment,),
-      onPressed: (){
-        ref.read(catNotifierProvider.notifier).addToFavorite(catFact: catFact, image: image, localeCode: localeCode, translateText: translateText);
+      tooltip: isSaved>0?"Favorite":"Click To Add Favorite",
+      icon: SvgPicture.asset("assets/images/heart.svg",semanticsLabel: 'Heart Image',color: isSaved>0?ColorConst.chigong:ColorConst.shyMoment,),
+      onPressed: ()async{
+        if(isSaved>0){
+          final res=await confirmRemoveDialog(context);
+          if(res!=null&&res==true){
+            ref.read(catNotifierProvider.notifier).removeFavorite(catFact: catFact, image: image, localeCode: localeCode, translateText: translateText);
+          }
+        }else{
+          ref.read(catNotifierProvider.notifier).addToFavorite(catFact: catFact, image: image, localeCode: localeCode, translateText: translateText);
+        }
       }
     );
   }

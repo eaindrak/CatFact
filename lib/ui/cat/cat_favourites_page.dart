@@ -5,6 +5,7 @@ import 'package:cat_fact/ui/cat/cat_fact_item_page.dart';
 import 'package:cat_fact/widgets/state_error_widget.dart';
 import 'package:cat_fact/widgets/state_loading_widget.dart';
 import 'package:cat_fact/widgets/text_style.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -55,7 +56,7 @@ class _CatFavPageState extends ConsumerState<CatFavPage> {
               style: TextStyles.smallText.copyWith(color: ColorConst.cityLight),
             ),
           ),
-          body: ListView.separated(
+          body: catFactList.length>0?ListView.separated(
               padding: EdgeInsets.all(7),
               itemBuilder: (context, index) {
                 return ListTile(
@@ -100,14 +101,15 @@ class _CatFavPageState extends ConsumerState<CatFavPage> {
                     ]),
                     padding: EdgeInsets.only(top: 5));
               },
-              itemCount: catFactList.length),
+              itemCount: catFactList.length):Center(child:Text("No favorite fact yet!!",style: TextStyles.largeText.copyWith(color: ColorConst.cityLight,fontWeight: FontWeight.bold),)),
         );
       },
       error: (error) => StateErrorWidget(error: error!),
     );
   }
 
-  void _goToDetail(CatFact catFact){
-    Navigator.push(context, MaterialPageRoute(builder: (context)=>CatFactItemPage(catFact: catFact ,)));
+  void _goToDetail(CatFact catFact)async{
+    await Navigator.push(context, MaterialPageRoute(builder: (context)=>CatFactItemPage(catFact: catFact ,)));
+    ref.read(catFavoriteListNotifierProvider.notifier).getAllfavoriteList();
   }
 }
