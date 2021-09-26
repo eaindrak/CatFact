@@ -5,8 +5,9 @@ import '../db/moor_db.dart' as db;
 
 abstract class ICatLocalRepository{
   Future<List<CatFact>> getAllSavedFact();
-  Future<int> saveFavorite(CatFact catFact);
+  Future<int> saveFavorite(CatFact catFact,int id);
   Future<int> checkFact(CatFact catFact);
+  Future<int> removeFavorite(CatFact catFact);
 }
 
 class CatLocalRepository implements ICatLocalRepository {
@@ -24,8 +25,8 @@ class CatLocalRepository implements ICatLocalRepository {
   }
 
   @override
-  Future<int> saveFavorite(CatFact catFact)async {
-    int res=await ref.read(dbProvider).saveFavorite(db.CatFact(fact: catFact.fact,length: catFact.length,id: 1));
+  Future<int> saveFavorite(CatFact catFact,int id)async {
+    int res=await ref.read(dbProvider).saveFavorite(db.CatFact(fact: catFact.fact,length: catFact.length,id: id));
     return res;
   }
 
@@ -33,6 +34,12 @@ class CatLocalRepository implements ICatLocalRepository {
   Future<int> checkFact(CatFact _catFact) async{
     final res= await ref.read(dbProvider).checkFacts(_catFact.fact);
     return res?1:0;
+  }
+
+  @override
+  Future<int> removeFavorite(CatFact catFact)async {
+    final res= await ref.read(dbProvider).removeFavorite(catFact.fact);
+    return res;
   }
   
 }

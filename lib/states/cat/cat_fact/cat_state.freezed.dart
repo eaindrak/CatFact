@@ -29,13 +29,15 @@ class _$CatRandomFactStateTearOff {
       required String imageName,
       required String sourceLan,
       required TranslateText translateText,
-      required int isSaved}) {
+      required int isSaved,
+      required String msg}) {
     return _CatRandomFactStateData(
       catFact: catFact,
       imageName: imageName,
       sourceLan: sourceLan,
       translateText: translateText,
       isSaved: isSaved,
+      msg: msg,
     );
   }
 
@@ -55,8 +57,13 @@ mixin _$CatRandomFactState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(CatFact catFact, String imageName,
-            String sourceLan, TranslateText translateText, int isSaved)
+    required TResult Function(
+            CatFact catFact,
+            String imageName,
+            String sourceLan,
+            TranslateText translateText,
+            int isSaved,
+            String msg)
         data,
     required TResult Function(String? error) error,
   }) =>
@@ -66,7 +73,7 @@ mixin _$CatRandomFactState {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(CatFact catFact, String imageName, String sourceLan,
-            TranslateText translateText, int isSaved)?
+            TranslateText translateText, int isSaved, String msg)?
         data,
     TResult Function(String? error)? error,
     required TResult orElse(),
@@ -151,8 +158,13 @@ class _$_CatRandomFactStateInitial implements _CatRandomFactStateInitial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(CatFact catFact, String imageName,
-            String sourceLan, TranslateText translateText, int isSaved)
+    required TResult Function(
+            CatFact catFact,
+            String imageName,
+            String sourceLan,
+            TranslateText translateText,
+            int isSaved,
+            String msg)
         data,
     required TResult Function(String? error) error,
   }) {
@@ -165,7 +177,7 @@ class _$_CatRandomFactStateInitial implements _CatRandomFactStateInitial {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(CatFact catFact, String imageName, String sourceLan,
-            TranslateText translateText, int isSaved)?
+            TranslateText translateText, int isSaved, String msg)?
         data,
     TResult Function(String? error)? error,
     required TResult orElse(),
@@ -250,8 +262,13 @@ class _$_CatRandomFactStateLoading implements _CatRandomFactStateLoading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(CatFact catFact, String imageName,
-            String sourceLan, TranslateText translateText, int isSaved)
+    required TResult Function(
+            CatFact catFact,
+            String imageName,
+            String sourceLan,
+            TranslateText translateText,
+            int isSaved,
+            String msg)
         data,
     required TResult Function(String? error) error,
   }) {
@@ -264,7 +281,7 @@ class _$_CatRandomFactStateLoading implements _CatRandomFactStateLoading {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(CatFact catFact, String imageName, String sourceLan,
-            TranslateText translateText, int isSaved)?
+            TranslateText translateText, int isSaved, String msg)?
         data,
     TResult Function(String? error)? error,
     required TResult orElse(),
@@ -316,7 +333,8 @@ abstract class _$CatRandomFactStateDataCopyWith<$Res> {
       String imageName,
       String sourceLan,
       TranslateText translateText,
-      int isSaved});
+      int isSaved,
+      String msg});
 
   $CatFactCopyWith<$Res> get catFact;
 }
@@ -339,6 +357,7 @@ class __$CatRandomFactStateDataCopyWithImpl<$Res>
     Object? sourceLan = freezed,
     Object? translateText = freezed,
     Object? isSaved = freezed,
+    Object? msg = freezed,
   }) {
     return _then(_CatRandomFactStateData(
       catFact: catFact == freezed
@@ -361,6 +380,10 @@ class __$CatRandomFactStateDataCopyWithImpl<$Res>
           ? _value.isSaved
           : isSaved // ignore: cast_nullable_to_non_nullable
               as int,
+      msg: msg == freezed
+          ? _value.msg
+          : msg // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 
@@ -380,7 +403,8 @@ class _$_CatRandomFactStateData implements _CatRandomFactStateData {
       required this.imageName,
       required this.sourceLan,
       required this.translateText,
-      required this.isSaved});
+      required this.isSaved,
+      required this.msg});
 
   @override
   final CatFact catFact;
@@ -392,10 +416,12 @@ class _$_CatRandomFactStateData implements _CatRandomFactStateData {
   final TranslateText translateText;
   @override
   final int isSaved;
+  @override
+  final String msg;
 
   @override
   String toString() {
-    return 'CatRandomFactState.data(catFact: $catFact, imageName: $imageName, sourceLan: $sourceLan, translateText: $translateText, isSaved: $isSaved)';
+    return 'CatRandomFactState.data(catFact: $catFact, imageName: $imageName, sourceLan: $sourceLan, translateText: $translateText, isSaved: $isSaved, msg: $msg)';
   }
 
   @override
@@ -415,7 +441,10 @@ class _$_CatRandomFactStateData implements _CatRandomFactStateData {
                 const DeepCollectionEquality()
                     .equals(other.translateText, translateText)) &&
             (identical(other.isSaved, isSaved) ||
-                const DeepCollectionEquality().equals(other.isSaved, isSaved)));
+                const DeepCollectionEquality()
+                    .equals(other.isSaved, isSaved)) &&
+            (identical(other.msg, msg) ||
+                const DeepCollectionEquality().equals(other.msg, msg)));
   }
 
   @override
@@ -425,7 +454,8 @@ class _$_CatRandomFactStateData implements _CatRandomFactStateData {
       const DeepCollectionEquality().hash(imageName) ^
       const DeepCollectionEquality().hash(sourceLan) ^
       const DeepCollectionEquality().hash(translateText) ^
-      const DeepCollectionEquality().hash(isSaved);
+      const DeepCollectionEquality().hash(isSaved) ^
+      const DeepCollectionEquality().hash(msg);
 
   @JsonKey(ignore: true)
   @override
@@ -438,12 +468,17 @@ class _$_CatRandomFactStateData implements _CatRandomFactStateData {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(CatFact catFact, String imageName,
-            String sourceLan, TranslateText translateText, int isSaved)
+    required TResult Function(
+            CatFact catFact,
+            String imageName,
+            String sourceLan,
+            TranslateText translateText,
+            int isSaved,
+            String msg)
         data,
     required TResult Function(String? error) error,
   }) {
-    return data(catFact, imageName, sourceLan, translateText, isSaved);
+    return data(catFact, imageName, sourceLan, translateText, isSaved, msg);
   }
 
   @override
@@ -452,13 +487,13 @@ class _$_CatRandomFactStateData implements _CatRandomFactStateData {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(CatFact catFact, String imageName, String sourceLan,
-            TranslateText translateText, int isSaved)?
+            TranslateText translateText, int isSaved, String msg)?
         data,
     TResult Function(String? error)? error,
     required TResult orElse(),
   }) {
     if (data != null) {
-      return data(catFact, imageName, sourceLan, translateText, isSaved);
+      return data(catFact, imageName, sourceLan, translateText, isSaved, msg);
     }
     return orElse();
   }
@@ -496,13 +531,15 @@ abstract class _CatRandomFactStateData implements CatRandomFactState {
       required String imageName,
       required String sourceLan,
       required TranslateText translateText,
-      required int isSaved}) = _$_CatRandomFactStateData;
+      required int isSaved,
+      required String msg}) = _$_CatRandomFactStateData;
 
   CatFact get catFact => throw _privateConstructorUsedError;
   String get imageName => throw _privateConstructorUsedError;
   String get sourceLan => throw _privateConstructorUsedError;
   TranslateText get translateText => throw _privateConstructorUsedError;
   int get isSaved => throw _privateConstructorUsedError;
+  String get msg => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   _$CatRandomFactStateDataCopyWith<_CatRandomFactStateData> get copyWith =>
       throw _privateConstructorUsedError;
@@ -577,8 +614,13 @@ class _$_CatRandomFactStateError implements _CatRandomFactStateError {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(CatFact catFact, String imageName,
-            String sourceLan, TranslateText translateText, int isSaved)
+    required TResult Function(
+            CatFact catFact,
+            String imageName,
+            String sourceLan,
+            TranslateText translateText,
+            int isSaved,
+            String msg)
         data,
     required TResult Function(String? error) error,
   }) {
@@ -591,7 +633,7 @@ class _$_CatRandomFactStateError implements _CatRandomFactStateError {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(CatFact catFact, String imageName, String sourceLan,
-            TranslateText translateText, int isSaved)?
+            TranslateText translateText, int isSaved, String msg)?
         data,
     TResult Function(String? error)? error,
     required TResult orElse(),

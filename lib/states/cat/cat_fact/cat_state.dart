@@ -15,7 +15,7 @@ class CatRandomFactState with _$CatRandomFactState {
   ///Loading
   const factory CatRandomFactState.loading() = _CatRandomFactStateLoading;
   ///Data
-  const factory CatRandomFactState.data({required CatFact catFact,required String imageName,required String sourceLan,required TranslateText translateText,required int isSaved}) = _CatRandomFactStateData;
+  const factory CatRandomFactState.data({required CatFact catFact,required String imageName,required String sourceLan,required TranslateText translateText,required int isSaved,required String msg}) = _CatRandomFactStateData;
   ///Error
   const factory CatRandomFactState.error([String? error]) = _CatRandomFactStateError;
 }

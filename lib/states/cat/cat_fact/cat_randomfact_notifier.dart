@@ -14,7 +14,7 @@ class CatNotifier extends StateNotifier<CatRandomFactState> {
       final catFact = await _catRepository.getRandomCatFact();
       String _imageName=await _getRandomImage();
       final res=await _getFavorite(catFact);
-      state = CatRandomFactState.data(catFact: catFact,imageName: _imageName,sourceLan: "en",translateText: TranslateText(originalText: catFact.fact,transalatedText: ""),isSaved: res);
+      state = CatRandomFactState.data(catFact: catFact,imageName: _imageName,sourceLan: "en",translateText: TranslateText(originalText: catFact.fact,transalatedText: ""),isSaved: res,msg: "");
     } catch (e) {
       print(e.toString());
       state = CatRandomFactState.error('Error!');
@@ -26,7 +26,7 @@ class CatNotifier extends StateNotifier<CatRandomFactState> {
     try {
       String _imageName=await _getRandomImage();
       final res=await _getFavorite(catFact);
-      state = CatRandomFactState.data(isSaved: res,catFact: catFact,imageName: _imageName,sourceLan: "en",translateText: TranslateText(originalText: catFact.fact,transalatedText: ""));
+      state = CatRandomFactState.data(isSaved: res,catFact: catFact,imageName: _imageName,sourceLan: "en",translateText: TranslateText(originalText: catFact.fact,transalatedText: ""),msg: "");
     } catch (e) {
       print(e.toString());
       state = CatRandomFactState.error('Error!');
@@ -40,13 +40,13 @@ class CatNotifier extends StateNotifier<CatRandomFactState> {
         final translator = GoogleTranslator();
         var _data=await translator.translate(catFact.fact, from: 'en', to: localeCode);
         TranslateText translateText=new TranslateText(originalText: catFact.fact, transalatedText: _data.text);
-        state = CatRandomFactState.data(catFact: CatFact(fact: translateText.transalatedText,length: catFact.length),imageName: image,sourceLan: localeCode,translateText: translateText,isSaved: isSaved);
+        state = CatRandomFactState.data(catFact: CatFact(fact: translateText.transalatedText,length: catFact.length),imageName: image,sourceLan: localeCode,translateText: translateText,isSaved: isSaved,msg: "");
       }
       else if (localeCode!="en"&&translateText.transalatedText!=""&&translateText.transalatedText.length>0){
-        state = CatRandomFactState.data(catFact: CatFact(fact: translateText.transalatedText,length: catFact.length),imageName: image,sourceLan: localeCode,translateText: translateText,isSaved: isSaved);
+        state = CatRandomFactState.data(catFact: CatFact(fact: translateText.transalatedText,length: catFact.length),imageName: image,sourceLan: localeCode,translateText: translateText,isSaved: isSaved,msg: "");
       }
       else{
-        state = CatRandomFactState.data(catFact: CatFact(fact: translateText.originalText,length: catFact.length),imageName: image,sourceLan: localeCode,translateText: translateText,isSaved: isSaved);
+        state = CatRandomFactState.data(catFact: CatFact(fact: translateText.originalText,length: catFact.length),imageName: image,sourceLan: localeCode,translateText: translateText,isSaved: isSaved,msg: "");
       }
     } catch (e) {
       print(e.toString());
@@ -66,9 +66,20 @@ class CatNotifier extends StateNotifier<CatRandomFactState> {
   Future<void> addToFavorite({required CatFact catFact,required String image,required String localeCode,required TranslateText translateText})async{
     state = const CatRandomFactState.loading();
     try {
-      final res=await _catLocalRepository.saveFavorite(catFact);
-      print(res.toString());
-      state = CatRandomFactState.data(catFact: CatFact(fact: catFact.fact,length: catFact.length),imageName: image,sourceLan: localeCode,translateText: translateText,isSaved: 1);
+      int _id=DateTime.now().millisecondsSinceEpoch;
+      final res=await _catLocalRepository.saveFavorite(catFact,_id);
+      state = CatRandomFactState.data(catFact: CatFact(fact: catFact.fact,length: catFact.length),imageName: image,sourceLan: localeCode,translateText: translateText,isSaved: res,msg: res>0?"Add To Favorite":"Cannot Add To Favorite");
+    } catch (e) {
+      print(e.toString());
+      state = CatRandomFactState.error('Error!');
+    }
+  }
+
+  Future<void> removeFavorite({required CatFact catFact,required String image,required String localeCode,required TranslateText translateText})async{
+    state = const CatRandomFactState.loading();
+    try {
+      final res=await _catLocalRepository.removeFavorite(catFact);
+      state = CatRandomFactState.data(catFact: CatFact(fact: catFact.fact,length: catFact.length),imageName: image,sourceLan: localeCode,translateText: translateText,isSaved: res,msg: res>0?"Remove From Favorite":"Cannot Remove From Favorite");
     } catch (e) {
       print(e.toString());
       state = CatRandomFactState.error('Error!');
